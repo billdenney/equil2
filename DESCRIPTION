@@ -1,0 +1,20 @@
+Package: equil2
+Title: Calculate Urinary Saturation with the EQUIL2 Algorithm
+Version: 0.0.0.9000
+Authors@R: 
+    person("Bill", "Denney", email="wdenney@humanpredictions.com", role=c("aut", "cre"), comment=c(ORCID="0000-0002-5759-428X"))
+Description: Calculate saturation of ionic substances in urine based on sodium,
+  potassium, calcium, magnesium, ammonia, chloride, phosphate, sulfate,
+  oxalate, citrate, ph, and urate.  This program is intended for research use,
+  only.  The code within is translated from EQUIL2 Visual Basic code based on
+  Werness, et al 1985 to R.  The Visual Basic code was kindly provided by Dr.
+  John Lieske of the Mayo Clinic.
+Suggests:
+    covr,
+    testthat (>= 3.0.0),
+    units
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Config/testthat/edition: 3
