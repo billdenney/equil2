@@ -229,9 +229,8 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
   a[idx_species$pH] <- pH
   a[idx_species$urate] <- urate_mg_dL
   
-  # initialize the amount vector (I think it's mostly converting mass to molar
-  # units)
-  a[1] <- a[1]/1000
+  # Mass to molar concentration conversions
+  a[1] <- a[1] / 1000
   # "K"
   a[2] <- a[2] / 1000
   # "CA"
@@ -268,7 +267,7 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
   # O2 <- 0
   # O3 <- 0
   # O4 <- 0
-  o_old <- rep(0, 5)
+  crystal_conc_prior <- rep(0, 5)
   
   for (idx_current in seq_len(10)) {
     a[12 + idx_current] <- 0.1*a[idx_current]
@@ -386,25 +385,10 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
     F2 <- F1 ^ 4
     F3 <- F1 ^ 9
     F4 <- F1 ^ 16
-    # If a[15] = 0 Then GoTo 2070
-    # If Abs((a[15] - O0) / a[15]) > 0.0001 Then GoTo 2160
-    # If a[16] = 0 Then GoTo 2090
-    # If Abs((a[16] - O1) / a[16]) > 0.0001 Then GoTo 2160
-    # If a[18] = 0 Then GoTo 2110
-    # If Abs((a[18] - O2) / a[18]) > 0.0001 Then GoTo 2160
-    # If a[20] = 0 Then GoTo 2130
-    # If Abs((a[20] - O3) / a[20]) > 0.0001 Then GoTo 2160
-    # If a[21] = 0 Then GoTo 2150
-    # If Abs((a[21] - O4) / a[21]) > 0.0001 Then GoTo 2160
-    # GoTo 2230
-    o_new <- c(a[15], a[16], a[18], a[20], a[21])
-    converged <- !any(abs((o_new - o_old)/o_new) > tolerance)
-    # O0 <- a[15]
-    # O1 <- a[16]
-    # O2 <- a[18]
-    # O3 <- a[20]
-    # O4 <- a[21]
-    o_old <- o_new
+    # Check for convergence (lines 2050-2200 in original source)
+    crystal_conc_current <- c(a[15], a[16], a[18], a[20], a[21])
+    converged <- !any(abs((crystal_conc_current - crystal_conc_prior)/crystal_conc_current) > tolerance)
+    crystal_conc_prior <- crystal_conc_current
   }
   if (current_iteration >= max_iterations) {
     warning(max_iterations, " iterations without convergence, interpret results with caution")
