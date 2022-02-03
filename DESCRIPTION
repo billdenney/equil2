@@ -9,10 +9,11 @@ Description: Calculate saturation of ionic substances in urine based on sodium,
   only.  The code within is translated from EQUIL2 Visual Basic code based on
   Werness, et al 1985 to R.  The Visual Basic code was kindly provided by Dr.
   John Lieske of the Mayo Clinic.
+Imports:
+    units
 Suggests:
     covr,
-    testthat (>= 3.0.0),
-    units
+    testthat (>= 3.0.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
