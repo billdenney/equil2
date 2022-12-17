@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/billdenney/equil2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/billdenney/equil2?branch=main)
-[![R-CMD-check](https://github.com/billdenney/equil2/workflows/R-CMD-check/badge.svg)](https://github.com/billdenney/equil2/actions)
+[![R-CMD-check](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of equil2 is to calculate urinary saturation with the EQUIL2 algorithm.
