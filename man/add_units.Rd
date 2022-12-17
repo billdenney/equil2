@@ -16,7 +16,4 @@ Examples are \code{"g_ammonia"}, \code{"mol_ammonia"}, and
 \code{"Eq_ammonia"}.  Species with units are all species inputs for the
 \code{equil2()} function.
 }
-\examples{
-add_units()
-}
 \keyword{Internal}

@@ -45,10 +45,16 @@ add_units <- function() {
       current_mol <- unit_definitions$mass_mole_conversion[current_row]
       current_eq <- unit_definitions$mole_eq_conversion[current_row]
       if (!is.na(current_mol)) {
-        units::install_unit(paste0("mol_", current_species), def = sprintf("%g g_%s", current_mol, current_species))
+        # See https://github.com/r-quantities/units/issues/334 for the reason
+        # we're adding two units at once.
+        new_units <- paste0("mol_", current_species)
+        if (identical(current_eq, 1)) {
+          new_units <- c(new_units, paste0("Eq_", current_species))
+        }
+        units::install_unit(new_units, def = sprintf("%g g_%s", current_mol, current_species))
       }
-      if (!is.na(current_eq)) {
-        units::install_unit(paste0("Eq_", current_species), def = sprintf("%g mol_%s", current_eq, current_species))
+      if (!(current_eq %in% c(NA, 1))) {
+        units::install_unit(paste0("Eq_", current_species), def = sprintf("%s mol_%s", current_eq, current_species))
       }
     }
     packageStartupMessage("units added to enable unit conversion")

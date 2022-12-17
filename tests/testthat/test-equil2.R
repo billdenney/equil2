@@ -22,10 +22,10 @@ test_that("equil2 works correctly with units", {
     value_round,
     # Output generated from ss.exe
     data.frame(
-      species = c("Calcium Oxalate", "Brushite", "Hydroxyapatite", 
+      species = c("Calcium Oxalate", "Brushite", "Hydroxyapatite",
                   "Uric Acid", "Sodium Urate", "Ammonium Urate"),
-      super_saturation = c(2.75, 1.01, 12802.58, 4.52, 1.55, 0),
-      neg_delta_Gibbs = c(1.31, 0.01, 2.72, 3.91, 0.57, 0)
+      super_saturation = c(2.75, 1.01, 12802.75, 4.52, 1.55, 0),
+      neg_delta_Gibbs = c(1.31, 0.01, 2.72, 3.91, 0.57, -11.39)
     ),
     tolerance=0.0001
   )
