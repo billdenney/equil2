@@ -53,18 +53,18 @@ Clinic.
 \examples{
 # Example values from https://files.labcorp.com/testmenu-d8/sample_reports/306266.pdf
 equil2(
-  sodium_mEq_L=set_units(45, "mmol_sodium/L"),
-  potassium_mEq_L=set_units(55, "mmol_potassium/L"),
-  calcium_mg_dL=set_units(15, "mg_calcium/dL"),
-  magnesium_mg_dL=set_units(15, "mg_magnesium/dL"),
-  ammonia_mEq_L=set_units(10, "ug_ammonia/dL"),
-  chloride_mEq_L=set_units(75, "mmol_chloride/L"),
-  phosphate_mg_dL=set_units(100, "mg_phosphate/dL"),
-  sulfate_mg_dL=set_units(20, "mEq_sulfate/L"),
-  oxalate_mg_dL=set_units(10, "mg_oxalate/L"),
-  citrate_mg_dL=set_units(400, "mg_citrate/L"),
+  sodium_mEq_L=units::set_units(45, "mmol_sodium/L"),
+  potassium_mEq_L=units::set_units(55, "mmol_potassium/L"),
+  calcium_mg_dL=units::set_units(15, "mg_calcium/dL"),
+  magnesium_mg_dL=units::set_units(15, "mg_magnesium/dL"),
+  ammonia_mEq_L=units::set_units(10, "ug_ammonia/dL"),
+  chloride_mEq_L=units::set_units(75, "mmol_chloride/L"),
+  phosphate_mg_dL=units::set_units(100, "mg_phosphate/dL"),
+  sulfate_mg_dL=units::set_units(20, "mEq_sulfate/L"),
+  oxalate_mg_dL=units::set_units(10, "mg_oxalate/L"),
+  citrate_mg_dL=units::set_units(400, "mg_citrate/L"),
   pH=5.5,
-  urate_mg_dL=set_units(50, "mg_urate/dL")
+  urate_mg_dL=units::set_units(50, "mg_urate/dL")
 )
 
 }

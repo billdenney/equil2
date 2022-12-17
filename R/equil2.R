@@ -1,5 +1,5 @@
 #' Calculate urine saturation with the EQUIL-2 algorithm
-#' 
+#'
 #' @param sodium_mEq_L,potassium_mEq_L,ammonia_mEq_L,chloride_mEq_L
 #'   Concentration of the given species in mEq/L (or a unit value that can be
 #'   converted to mEq/L)
@@ -8,12 +8,12 @@
 #'   Concentration of the given species in mg/dL (or a unit value that can be
 #'   converted to mg/dL)
 #' @param pH The urine pH
-#' 
+#'
 #' @details This program is intended for research use, only.  The code within is
 #'   translated from Visual Basic code based on Werness, et al 1985 to R.  The
 #'   Visual Basic code was kindly provided by Dr. John Lieske of the Mayo
 #'   Clinic.
-#' 
+#'
 #' @return A data.frame with three columns:
 #' \itemize{
 #'   \item{"species" indicating the chemical species}
@@ -29,20 +29,20 @@
 #' @examples
 #' # Example values from https://files.labcorp.com/testmenu-d8/sample_reports/306266.pdf
 #' equil2(
-#'   sodium_mEq_L=set_units(45, "mmol_sodium/L"),
-#'   potassium_mEq_L=set_units(55, "mmol_potassium/L"),
-#'   calcium_mg_dL=set_units(15, "mg_calcium/dL"),
-#'   magnesium_mg_dL=set_units(15, "mg_magnesium/dL"),
-#'   ammonia_mEq_L=set_units(10, "ug_ammonia/dL"),
-#'   chloride_mEq_L=set_units(75, "mmol_chloride/L"),
-#'   phosphate_mg_dL=set_units(100, "mg_phosphate/dL"),
-#'   sulfate_mg_dL=set_units(20, "mEq_sulfate/L"),
-#'   oxalate_mg_dL=set_units(10, "mg_oxalate/L"),
-#'   citrate_mg_dL=set_units(400, "mg_citrate/L"),
+#'   sodium_mEq_L=units::set_units(45, "mmol_sodium/L"),
+#'   potassium_mEq_L=units::set_units(55, "mmol_potassium/L"),
+#'   calcium_mg_dL=units::set_units(15, "mg_calcium/dL"),
+#'   magnesium_mg_dL=units::set_units(15, "mg_magnesium/dL"),
+#'   ammonia_mEq_L=units::set_units(10, "ug_ammonia/dL"),
+#'   chloride_mEq_L=units::set_units(75, "mmol_chloride/L"),
+#'   phosphate_mg_dL=units::set_units(100, "mg_phosphate/dL"),
+#'   sulfate_mg_dL=units::set_units(20, "mEq_sulfate/L"),
+#'   oxalate_mg_dL=units::set_units(10, "mg_oxalate/L"),
+#'   citrate_mg_dL=units::set_units(400, "mg_citrate/L"),
 #'   pH=5.5,
-#'   urate_mg_dL=set_units(50, "mg_urate/dL")
+#'   urate_mg_dL=units::set_units(50, "mg_urate/dL")
 #' )
-#' 
+#'
 #' @references
 #' Werness PG, Brown CM, Smith LH, Finlayson B. Equil2: A Basic Computer Program
 #' for the Calculation of Urinary Saturation. Journal of Urology.
@@ -191,7 +191,7 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
       urate=10, # input value
       PYRO=11,
       CO2=31,
-      
+
       NAHPP=50,
       KHPO4=51,
       KSO4=52,
@@ -204,7 +204,7 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
       #pp=11,
       caox=60,
       pp=12,
-      
+
       chloride=91, # input value
       calcium_oxalate=100,
       brushite=101,
@@ -228,7 +228,7 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
   a[idx_species$citrate] <- citrate_mg_dL
   a[idx_species$pH] <- pH
   a[idx_species$urate] <- urate_mg_dL
-  
+
   # Mass to molar concentration conversions
   a[1] <- a[1] / 1000
   # "K"
@@ -257,7 +257,7 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
   # "UR"
   a[10] <- a[10] / 16800
   a[26] <- 10 ^ (-a[24])
-  
+
   F1 <- 0.7
   F2 <- 0.3
   F3 <- 0.1
@@ -268,7 +268,7 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
   # O3 <- 0
   # O4 <- 0
   crystal_conc_prior <- rep(0, 5)
-  
+
   for (idx_current in seq_len(10)) {
     a[12 + idx_current] <- 0.1*a[idx_current]
   }
@@ -555,7 +555,7 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
   # supersaturation and delta-Gibbs energy
   ret_ss <-
     data.frame(
-      species=c("Calcium Oxalate", "Brushite", "Hydroxyapatite", 
+      species=c("Calcium Oxalate", "Brushite", "Hydroxyapatite",
                 "Uric Acid", "Sodium Urate", "Ammonium Urate"),
       super_saturation=c(supersat_calcium_oxalate, supersat_brushite, supersat_hydroxyapatite,
                          supersat_uric_acid, supersat_sodium_urate, supersat_ammonium_urate),
