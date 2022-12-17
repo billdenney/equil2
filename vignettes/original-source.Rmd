@@ -1,6 +1,6 @@
 ---
 title: "Original Source Code"
-author: "Vignette Author"
+author: "Bill Denney"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

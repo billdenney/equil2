@@ -1,6 +1,6 @@
 Package: equil2
 Title: Calculate Urinary Saturation with the EQUIL2 Algorithm
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person("Bill", "Denney", email="wdenney@humanpredictions.com", role=c("aut", "cre"), comment=c(ORCID="0000-0002-5759-428X"))
 Description: Calculate saturation of ionic substances in urine based on sodium,
