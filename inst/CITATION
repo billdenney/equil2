@@ -6,7 +6,7 @@ citEntry(
 	volume = "{134}",
 	issn = "{0022-5347, 1527-3792}",
 	shorttitle = "{Equil2}",
-	url = "http://www.jurology.com/doi/10.1016/S0022-5347%2817%2947703-2",
+	url = "https://www.jurology.com/doi/10.1016/S0022-5347%2817%2947703-2",
 	doi = "10.1016/S0022-5347(17)47703-2",
 	abstract = "A BASIC computer program for the calculation of urinary supersaturation with respect to the common kidney stone components is described. In vitro and in vivo tests show that the program described accurately calculates supersaturation. The application of this computer program to urolithiasis research is discussed.",
 	language = "en",
