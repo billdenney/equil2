@@ -8,6 +8,8 @@
 [![Codecov test
 coverage](https://codecov.io/gh/billdenney/equil2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/billdenney/equil2?branch=main)
 [![R-CMD-check](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/equil2)](https://CRAN.R-project.org/package=equil2)
 <!-- badges: end -->
 
 The goal of equil2 is to calculate urinary saturation with the EQUIL2
