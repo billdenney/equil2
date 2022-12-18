@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   original-source: original-source.html
-last_built: 2022-12-18T16:25Z
+last_built: 2022-12-18T16:30Z
 urls:
   reference: https://billdenney.github.io/equil2/reference
   article: https://billdenney.github.io/equil2/articles
