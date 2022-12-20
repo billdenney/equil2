@@ -12,3 +12,4 @@
 * The caveat in the DESCRIPTION file of "This program is intended for research
   use, only." was required by Dr. Lieske to allow for its release.
 * Updated DESCRIPTION based on CRAN review.
+* Updated DESCRIPTION to correct grammatical issues found by Victoria Wimmer
