@@ -1,10 +1,9 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.8.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   original-source: original-source.html
-last_built: 2022-12-22T01:27Z
+last_built: 2026-06-09T18:09Z
 urls:
   reference: https://billdenney.github.io/equil2/reference
   article: https://billdenney.github.io/equil2/articles
-

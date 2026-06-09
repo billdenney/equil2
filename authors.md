@@ -1,0 +1,33 @@
+# Authors and Citation
+
+## Authors
+
+- **Bill Denney**. Author, maintainer, copyright holder.
+  [](https://orcid.org/0000-0002-5759-428X)
+
+- **John Lieske**. Copyright holder.
+  [](https://orcid.org/0000-0002-0202-5944)
+
+## Citation
+
+Werness PG, Brown CM, Smith LH, Finlayson B. Equil2: A Basic Computer
+Program for the Calculation of Urinary Saturation. Journal of Urology.
+1985;134(6):1242-1244. doi:10.1016/S0022-5347(17)47703-2
+
+    @Article{,
+      title = {{Equil2: {A} {Basic} {Computer} {Program} for the {Calculation} of {Urinary} {Saturation}}},
+      volume = {{134}},
+      issn = {{0022-5347, 1527-3792}},
+      shorttitle = {{Equil2}},
+      url = {https://www.jurology.com/doi/10.1016/S0022-5347%2817%2947703-2},
+      doi = {10.1016/S0022-5347(17)47703-2},
+      abstract = {A BASIC computer program for the calculation of urinary supersaturation with respect to the common kidney stone components is described. In vitro and in vivo tests show that the program described accurately calculates supersaturation. The application of this computer program to urolithiasis research is discussed.},
+      language = {en},
+      number = {6},
+      urldate = {2021-11-06},
+      journal = {Journal of Urology},
+      author = {{Werness} and Peter G. and {Brown} and Charles M. and {Smith} and Lynwood H. and {Finlayson} and {Birdwell}},
+      month = {Dec},
+      year = {1985},
+      pages = {1242--1244},
+    }
