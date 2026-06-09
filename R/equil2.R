@@ -14,6 +14,14 @@
 #'   Visual Basic code was kindly provided by Dr. John Lieske of the Mayo
 #'   Clinic.
 #'
+#'   `phosphate_mg_dL` is the mass of phosphate (PO4, 94.97 g/mol) per dL, and
+#'   `sulfate_mg_dL` is the mass of sulfate (SO4, 96.07 g/mol) per dL.  U.S.
+#'   clinical labs typically report "phosphate" and "sulfate" as the mass of
+#'   the inorganic element (P or S), so a value of 100 mg/dL on a clinical
+#'   report corresponds to ~32.3 mmol/L of phosphate (P MW 30.97) or
+#'   ~31.2 mmol/L of sulfate (S MW 32.06).  Supplying inputs in mmol/L (or any
+#'   molar unit) avoids ambiguity.
+#'
 #' @return A data.frame with three columns:
 #' \itemize{
 #'   \item{"species" indicating the chemical species}
@@ -28,6 +36,10 @@
 #'
 #' @examples
 #' # Example values from https://files.labcorp.com/testmenu-d8/sample_reports/306266.pdf
+#' # Phosphate and sulfate inputs are given in mmol/L so the meaning is
+#' # unambiguous: clinical labs often report "phosphate (mg/dL)" as mass of
+#' # inorganic phosphorus (P), but the `mg_phosphate/dL` unit in this package
+#' # is mass of the PO4 ion. See vignette("original-source") for details.
 #' equil2(
 #'   sodium_mEq_L=units::set_units(45, "mmol_sodium/L"),
 #'   potassium_mEq_L=units::set_units(55, "mmol_potassium/L"),
@@ -35,8 +47,8 @@
 #'   magnesium_mg_dL=units::set_units(15, "mg_magnesium/dL"),
 #'   ammonia_mEq_L=units::set_units(10, "ug_ammonia/dL"),
 #'   chloride_mEq_L=units::set_units(75, "mmol_chloride/L"),
-#'   phosphate_mg_dL=units::set_units(100, "mg_phosphate/dL"),
-#'   sulfate_mg_dL=units::set_units(20, "mEq_sulfate/L"),
+#'   phosphate_mg_dL=units::set_units(32.285, "mmol_phosphate/L"),
+#'   sulfate_mg_dL=units::set_units(10, "mmol_sulfate/L"),
 #'   oxalate_mg_dL=units::set_units(10, "mg_oxalate/L"),
 #'   citrate_mg_dL=units::set_units(400, "mg_citrate/L"),
 #'   pH=5.5,
@@ -245,10 +257,10 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
   a[91] <- a[91] / 1000
   # "CO2"
   a[31] <- a[31] / 4401
-  # "P"
-  a[6] <- a[6] / 3097
-  # "S"
-  a[7] <- a[7] / 3206
+  # "PO4" (phosphate ion, 94.97 g/mol x 100 dL/L)
+  a[6] <- a[6] / 9497
+  # "SO4" (sulfate ion, 96.07 g/mol x 100 dL/L)
+  a[7] <- a[7] / 9607
   # "CIT"
   a[9] <- a[9] / 19212
   # "OX"
@@ -413,9 +425,9 @@ equil2_helper <- function(sodium_mEq_L, # mEq/L
       Ammonia=a[5] * 1000,
       "[KCIT]"=a[54],
       Chloride=a[91] * 1000,
-      Phosphate=a[6] * 3097,
+      Phosphate=a[6] * 9497,
       "[KPP]"=a[55],
-      Sulfate=a[7] * 3206,
+      Sulfate=a[7] * 9607,
       "[CAPO4]"=a[56],
       Oxalate=a[8] * 8802,
       "[CAHPO4]"=a[57],
