@@ -21,10 +21,11 @@ test_that("equil2 works correctly with units", {
   value_round <- value
   value_round$super_saturation <- round(value_round$super_saturation, 2)
   value_round$neg_delta_Gibbs <- round(value_round$neg_delta_Gibbs, 2)
-  # TODO: Verify these against ss.exe by entering phosphate=100, sulfate=32.06
-  # (mg/dL) in the V5 GUI. The numbers below were snapshotted from the R port
-  # after the issue #2 fix and should match ss.exe with the equivalent
-  # mg P/dL and mg S/dL inputs (the molar amounts are identical).
+  # Verified against the V5 BASIC source (with the same issue #2 unit fix
+  # applied) running in LibreOffice 26.2.4 Basic with Option VBASupport 1.
+  # R port and V5 BASIC agree on ionic strength to ~2 ppb and on the six
+  # supersaturation / Gibbs-energy values to <1 ppm. See the "Original
+  # Source Code" vignette for the verification procedure.
   expect_equal(
     value_round,
     data.frame(

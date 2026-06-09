@@ -25,9 +25,13 @@
   `add_units()`. The original V5 BASIC source uses atomic-weight factors
   for inorganic P (30.97) and S (32.06), so calling code that supplied
   unit-aware inputs such as `set_units(32, "mmol_phosphate/L")` saw
-  approximately 3x over-estimates. Thanks Lea Lerose for the report and
-  diagnosis. See `vignette("original-source")` for further discussion and
-  a brief V1-vs-V5 comparison.
+  approximately 3x over-estimates. The R port has been cross-validated
+  against the V5 BASIC source itself (with the same fix applied) run in
+  LibreOffice Basic; the two agree on ionic strength to ~2 ppb and on
+  the six supersaturation / Gibbs-energy outputs to better than 1 ppm on
+  the LabCorp inputs. Thanks Lea Lerose for the report and diagnosis.
+  See `vignette("original-source")` for further discussion and a brief
+  V1-vs-V5 comparison.
 
 # equil2 1.0.0
 
