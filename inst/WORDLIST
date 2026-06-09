@@ -1,5 +1,7 @@
+Brushite
 CMD
 CaCO
+CaHPO
 CaHPP
 CaOHPP
 CaOx
@@ -13,7 +15,9 @@ HCO
 HPP
 HTRIS
 HU
+Hydroxyapatite
 KPP
+Ksp
 LH
 Lerose
 MgCO
@@ -23,10 +27,13 @@ MgPP
 NaCO
 NaHPP
 NaPP
+Oxalate
 Pyrophosphate
 RSR
+RSRs
 Struvite
 TRIS
+Urate
 Werness
 al
 brushite
@@ -44,7 +51,11 @@ mol
 oxalate
 ph
 polyatomic
+pyrophosphate
 speciation
+stoichiometry
 struvite
+supersaturations
+unitless
 urate
 ΔGibbs
