@@ -694,3 +694,96 @@ Sub Text9_Change()
 a(8) = Val(Text9.Text)
 End Sub
 ```
+
+# Note on phosphate and sulfate units (issue #2)
+
+Lines `717` and `719` of the V5 source above divide the "Phosphate (mg/dl)"
+and "Sulfate (mg/dl)" inputs by `3097` and `3206` respectively:
+
+```
+717 a(6) = a(6) / 3097
+719 a(7) = a(7) / 3206
+```
+
+These factors are the atomic weights of *inorganic phosphorus* (P,
+30.97 g/mol) and *sulfur* (S, 32.06 g/mol) multiplied by 100 to convert
+mg/dL to mol/L. They do **not** correspond to the molecular weights of the
+phosphate ion (PO₄³⁻, 94.97 g/mol) or the sulfate ion (SO₄²⁻, 96.07 g/mol).
+In other words, the V5 algorithm expects "Phosphate (mg/dl)" to be the
+mass of inorganic phosphorus and "Sulfate (mg/dl)" to be the mass of
+sulfur — which is consistent with how U.S. clinical labs report those
+species, but conflicts with the chemical names of the inputs.
+
+This mismatch was reported in [issue #2](https://github.com/billdenney/equil2/issues/2)
+by Lea Lerose, who demonstrated that the R port's unit-aware inputs (e.g.
+`set_units(32, "mmol_phosphate/L")`) were being inflated by a factor of
+roughly 94.97 / 30.97 ≈ 3.07 because the `units` package converts the
+input value via the *true* PO₄ molecular weight while the algorithm then
+divides by the P-based factor.
+
+In the R port, this has been resolved by replacing the V5 factors with the
+true polyatomic-ion factors:
+
+| V5 source line | V5 value | R port value      | Reason                                           |
+|----------------|----------|-------------------|--------------------------------------------------|
+| `a(6) = a(6) / 3097` | 3097 | **9497** | 94.97 g/mol × 100 dL/L — actual PO₄ ion mass     |
+| `a(7) = a(7) / 3206` | 3206 | **9607** | 96.07 g/mol × 100 dL/L — actual SO₄ ion mass     |
+| output `a(6) * 3097` | 3097 | **9497** | mirror of the input factor                       |
+| output `a(7) * 3206` | 3206 | **9607** | mirror of the input factor                       |
+
+Users with legacy clinical data recorded as "phosphate (mg/dL)" meaning
+*mass of P* should convert by multiplying by ≈ 3.066 (= 94.97 / 30.97) to
+get mass of PO₄, or — more simply — supply the value in mmol/L, where 1
+mmol of P = 1 mmol of PO₄. Same logic applies to sulfate with the ratio
+96.07 / 32.06 ≈ 3.00.
+
+# V1 vs V5 differences (informational)
+
+The R port is based on the V5 (form-based BASIC) source shown above. The
+original Mayo Clinic class module `clsEquil2` ("V1") is a richer
+implementation that is provided in issue #2 as an attached `.txt` file.
+Below is a brief summary of the differences, included so users can decide
+whether they need V1's additional capabilities.
+
+**Inputs.** V1 takes all species in mmol per collection volume (plus a
+`Vol` parameter) and then converts to mol/L by dividing by `Vol × 1000`.
+This means V1 has no per-species atomic-weight factors at all, and the
+phosphate/sulfate confusion above does not arise — the V1 approach is
+unambiguous by construction.
+
+**Additional chemistry in V1.** V1 models several pathways that V5 (and
+therefore the R port) does not:
+
+- **CO₂ / bicarbonate / carbonate** chemistry (H₂CO₃, HCO₃⁻, CO₃²⁻, plus
+  NaCO₃, Na₂CO₃, CaCO₃, MgCO₃ complexes).
+- **Pyrophosphate (PP)** speciation (HPP, H₂PP, H₃PP, H₄PP, CaPP, CaHPP,
+  CaOHPP, MgPP, MgOHPP, NaPP, Na₂PP, NaHPP, KPP).
+- **TRIS buffer** (HTRIS).
+- **Struvite (MgNH₄PO₄)** included in the Mg and NH₄ mass balances.
+- **Na-urate / NH₄-urate / K-urate** complexes included in the Na/NH₄/K
+  mass balances (V5 computes their supersaturation ratios but does not
+  feed them back into the cation balance).
+- **Chloride auto-fill** via electroneutrality when no chloride is
+  supplied (V5 requires a chloride input).
+
+**Stability constants.** V1 and V5 share the same constants for the
+core CaOx / brushite / hydroxyapatite / uric-acid / Na-urate / NH₄-urate
+pathways. The constants that differ are concentrated in the CO₂, PP, and
+HU pathways — pathways V5 does not use anyway. For example, V1 uses
+`P7 = 0.00229` for CO₂ dissociation while V5 uses `S(61) = 0.00123`; V1
+uses `7.943 × 10¹⁰` for HU formation while V5 uses `S(9) = 278000`.
+
+**Outputs.** V1 reports activity products (`APCaOx`, `APBr`, `APStru`,
+`APUA`, `APNaU`) and relative saturation ratios (RSR) for calcium
+oxalate, brushite, struvite, and uric acid only. V5 (and the R port)
+additionally reports supersaturation for hydroxyapatite, sodium urate,
+and ammonium urate, plus negative ΔGibbs energies for all six.
+
+**Convergence.** V1 caps iteration at 500 and treats non-convergence as
+an error. V5 (and the R port) caps at 50 and warns.
+
+**Bottom line.** The R port is a faithful translation of V5. The only
+true *bug* it inherited from V5 is the phosphate/sulfate unit confusion
+fixed in this release. The other items above are V5-vs-V1 *scope* gaps,
+not translation errors. A more complete port that adopts V1's structure
+is feasible but is out of scope for the current release.

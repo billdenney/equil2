@@ -5,11 +5,11 @@
 
 <!-- badges: start -->
 
-[![Codecov test
-coverage](https://codecov.io/gh/billdenney/equil2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/billdenney/equil2?branch=main)
 [![R-CMD-check](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/equil2)](https://CRAN.R-project.org/package=equil2)
+[![Codecov test
+coverage](https://codecov.io/gh/billdenney/equil2/graph/badge.svg)](https://app.codecov.io/gh/billdenney/equil2)
 <!-- badges: end -->
 
 The goal of equil2 is to calculate urinary saturation with the EQUIL2
@@ -40,6 +40,10 @@ supersaturation:
 ``` r
 library(equil2)
 #> units added to enable unit conversion
+# Phosphate and sulfate inputs are given in mmol/L so the meaning is
+# unambiguous: clinical labs often report "phosphate (mg/dL)" as mass of
+# inorganic phosphorus (P), but the mg_phosphate/dL unit in this package is
+# mass of the PO4 ion. See vignette("original-source") for details.
 equil2(
   sodium_mEq_L=units::set_units(45, "mmol_sodium/L"),
   potassium_mEq_L=units::set_units(55, "mmol_potassium/L"),
@@ -47,18 +51,18 @@ equil2(
   magnesium_mg_dL=units::set_units(15, "mg_magnesium/dL"),
   ammonia_mEq_L=units::set_units(10, "ug_ammonia/dL"),
   chloride_mEq_L=units::set_units(75, "mmol_chloride/L"),
-  phosphate_mg_dL=units::set_units(100, "mg_phosphate/dL"),
-  sulfate_mg_dL=units::set_units(20, "mEq_sulfate/L"),
+  phosphate_mg_dL=units::set_units(32.285, "mmol_phosphate/L"),
+  sulfate_mg_dL=units::set_units(10, "mmol_sulfate/L"),
   oxalate_mg_dL=units::set_units(10, "mg_oxalate/L"),
   citrate_mg_dL=units::set_units(400, "mg_citrate/L"),
   pH=5.5,
   urate_mg_dL=units::set_units(50, "mg_urate/dL")
 )
 #>           species super_saturation neg_delta_Gibbs
-#> 1 Calcium Oxalate     2.751276e+00     1.309105783
-#> 2        Brushite     1.006634e+00     0.008552342
-#> 3  Hydroxyapatite     1.280275e+04     2.718439456
-#> 4       Uric Acid     4.524588e+00     3.905145139
-#> 5    Sodium Urate     1.550834e+00     0.567578360
-#> 6  Ammonium Urate     1.493353e-04   -11.394850707
+#> 1 Calcium Oxalate     3.096613e+00       1.4620547
+#> 2        Brushite     1.259350e+00       0.2982760
+#> 3  Hydroxyapatite     3.904189e+04       3.0389279
+#> 4       Uric Acid     4.563641e+00       3.9273785
+#> 5    Sodium Urate     1.626900e+00       0.6295155
+#> 6  Ammonium Urate     1.618179e-04     -11.2910116
 ```
