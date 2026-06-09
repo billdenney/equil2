@@ -2,8 +2,9 @@ pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
+  original-source-v1: original-source-v1.html
   original-source: original-source.html
-last_built: 2026-06-09T18:09Z
+last_built: 2026-06-09T20:24Z
 urls:
   reference: https://billdenney.github.io/equil2/reference
   article: https://billdenney.github.io/equil2/articles

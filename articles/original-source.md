@@ -727,6 +727,16 @@ to get mass of PO₄, or — more simply — supply the value in mmol/L, where
 1 mmol of P = 1 mmol of PO₄. Same logic applies to sulfate with the
 ratio 96.07 / 32.06 ≈ 3.00.
 
+**Cross-validation.** The R port has been cross-validated against the V5
+BASIC source itself by transcribing the `calc()` Sub above (with the
+same `/9497` and `/9607` fix applied) into LibreOffice 26.2.4 Basic and
+running it with the LabCorp inputs in `mmol_phosphate/L` /
+`mmol_sulfate/L` form. R and V5 BASIC agree on ionic strength to about 2
+parts per billion and on all six supersaturation values (Calcium
+Oxalate, Brushite, Hydroxyapatite, Uric Acid, Sodium Urate, Ammonium
+Urate) plus their ΔGibbs energies to better than 1 part per million.
+Residual differences are floating-point ordering noise.
+
 ## V1 vs V5 differences (informational)
 
 The R port is based on the V5 (form-based BASIC) source shown above. The
