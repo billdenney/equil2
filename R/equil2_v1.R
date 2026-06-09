@@ -374,11 +374,13 @@ equil2_v1_helper <- function(pH,
     MgOHPP <- P5X1A6 * (F2 * F4 / F3) * Mg * OH * PP_var
     Struv  <- F1 * F2 * F3 * Mg * PO4 * NH4
 
-    # Total concentrations (lines 496-513)
+    # Total concentrations (V1 lines 496-513). Note: V1 does NOT include
+    # NaU / KU / NH4U in STNa / STK / STNH4 even though it computes those
+    # complexes; they affect ionic strength and chloride auto-fill only.
     STNa  <- Na + NaHPO4 + NaSO4 + NaOx + NaCit + NaPP + NaHPP + 2 * Na2PP +
-             NaCO3 + Na2CO3 + NaU
-    STK   <- K + KHPO4 + KSO4 + KOx + KCit + KPP + KU
-    STNH4 <- NH4 + NH4HPO + NH4SO4 + NH4Ox + NH4Cit + Struv + NH4U
+             NaCO3 + Na2CO3
+    STK   <- K + KHPO4 + KSO4 + KOx + KCit + KPP
+    STNH4 <- NH4 + NH4HPO + NH4SO4 + NH4Ox + NH4Cit + Struv
     STCa  <- Ca + CaPO4 + CaHPO4 + CaH2PO + CaSO4 + CaOx + 2 * Ca2Ox + CaCit +
              CaHCit + CaOx2 + CaH2CT + CaCO3 + CaPP + CaHPP + CaOHPP + CaOH
     STMg  <- Mg + MgPO4 + MgHPO4 + MgH2PO + MgSO4 + MgOx + 2 * Mg2Ox + MgCit +

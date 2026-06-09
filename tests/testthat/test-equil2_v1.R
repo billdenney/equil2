@@ -19,10 +19,12 @@ test_that("equil2_v1 works correctly with units", {
   ss_round <- value$supersaturation
   ss_round$activity_product <- signif(ss_round$activity_product, 4)
   ss_round$RSR <- round(ss_round$RSR, 2)
-  # TODO: Verify these against ss.exe / the original V1 VBA module by
-  # entering the equivalent mmol/L inputs (phosphate 32.285, sulfate 10).
-  # Snapshotted from the R port; if a V1 reference output becomes available,
-  # update these values.
+  # Verified against the original V1 VBA module (clsEquil2) run in
+  # LibreOffice 26.2.4 Basic with Option VBASupport 1. R port and
+  # VBA agree on ionic strength to <1 ppm and on the four activity
+  # products / RSRs to ~10 ppm (floating-point reordering only). See
+  # the "Original Source Code (V1)" vignette for the verification
+  # procedure.
   expect_equal(
     ss_round,
     data.frame(

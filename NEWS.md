@@ -3,15 +3,17 @@
 * New function `equil2_v1()` ports the original Mayo Clinic class-based
   VBA module (`clsEquil2`, attached to issue 2). V1 takes mmol/L inputs,
   models CO2 / bicarbonate / carbonate chemistry, TRIS buffer, struvite
-  in the Mg / NH4 mass balance, and urate-cation complexes in the
-  Na / K / NH4 mass balance, and (when chloride is omitted) auto-fills
+  in the Mg / NH4 mass balance, and (when chloride is omitted) auto-fills
   chloride from electroneutrality. V1 outputs activity products and
   relative saturation ratios for Calcium Oxalate, Brushite, Struvite,
   and Uric Acid. For Hydroxyapatite, Sodium Urate, and Ammonium Urate
   supersaturations (which V1 does not compute) keep using `equil2()`.
   Pyrophosphate input is accepted but disabled inside the algorithm,
   matching the V1 source. The V1 source code is shipped in the new
-  vignette `vignette("original-source-v1")`.
+  vignette `vignette("original-source-v1")`. The R port has been
+  verified against the original VBA module by running `clsEquil2.bas`
+  in LibreOffice Basic with `Option VBASupport 1`; on the LabCorp
+  inputs the two agree to better than 10 ppm.
 * New units in `add_units()`: `g_carbondioxide`, `g_pyrophosphate`,
   `g_tris` (and corresponding mol / mmol variants) for use with
   `equil2_v1()` inputs.

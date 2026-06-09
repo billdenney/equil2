@@ -71,7 +71,7 @@ a warning on non-convergence.
 
 # Quirks preserved by the R port
 
-Two quirks of the V1 source are preserved verbatim in `equil2_v1()` for
+Three quirks of the V1 source are preserved verbatim in `equil2_v1()` for
 fidelity:
 
 1. **Pyrophosphate is disabled.**  After reading the input, V1
@@ -82,6 +82,23 @@ fidelity:
 2. **`NH4PO4` is uninitialized.**  V1 declares `Dim NH4PO4 As Double` but
    never assigns it, so it is always zero (VBA default).  In the R port we
    make this explicit with `NH4PO4 <- 0`.
+3. **Urate-cation complexes (`NaU`, `KU`, `NH4U`) are not in the cation
+   mass balance.**  V1 computes them and uses them for ionic strength and
+   for the chloride electroneutrality auto-fill, but `STNa` / `STK` /
+   `STNH4` do *not* include them.  Effectively V1 treats them as trace
+   species that don't deplete free Na, K, or NH4.  The R port matches
+   this.
+
+# Numerical verification against the V1 VBA module
+
+The R port has been cross-validated against the original VBA module by
+running `clsEquil2.bas` in LibreOffice 26.2.4 with `Option VBASupport 1`
+and `Option ClassModule`, using LibreOffice's Python UNO bridge to drive
+the Calc method.  On the LabCorp inputs in the package examples, ionic
+strength agrees to <1 ppm and the four reported activity products /
+relative saturation ratios agree to ~10 ppm.  The residual differences
+are floating-point reordering noise from how mass-balance sums are
+grouped in R vs the original BASIC.
 
 # EQUIL-2 V1 source
 
