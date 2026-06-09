@@ -15,7 +15,8 @@ add_units <- function() {
     unit_definitions <-
       data.frame(
         species=c("ammonia", "chloride", "potassium", "sodium",
-                  "calcium", "citrate", "magnesium", "oxalate", "phosphate", "sulfate", "urate"
+                  "calcium", "citrate", "magnesium", "oxalate", "phosphate", "sulfate", "urate",
+                  "carbondioxide", "pyrophosphate", "tris"
         ),
         mass_mole_conversion=
           c(
@@ -30,9 +31,14 @@ add_units <- function() {
             88.02, # weight from https://pubchem.ncbi.nlm.nih.gov/compound/Oxalate
             94.971, # weight from https://pubchem.ncbi.nlm.nih.gov/compound/Phosphate
             96.07, # weight from https://pubchem.ncbi.nlm.nih.gov/compound/Sulfate
-            168.11 # weight from https://pubchem.ncbi.nlm.nih.gov/compound/Urate
+            168.11, # weight from https://pubchem.ncbi.nlm.nih.gov/compound/Urate
+
+            44.009, # weight from https://pubchem.ncbi.nlm.nih.gov/compound/Carbon-Dioxide
+            173.943, # P2O7^4- weight from https://pubchem.ncbi.nlm.nih.gov/compound/pyrophosphate
+            121.135 # TRIS (Tris(hydroxymethyl)aminomethane) https://pubchem.ncbi.nlm.nih.gov/compound/Trometamol
           ),
-        mole_eq_conversion=c(1, 1, 1, 1, NA, NA, NA, NA, NA, 0.5, NA)
+        mole_eq_conversion=c(1, 1, 1, 1, NA, NA, NA, NA, NA, 0.5, NA,
+                             NA, NA, NA)
       )
     units::remove_unit(c(
       paste0("g_", unit_definitions$species),
