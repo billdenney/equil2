@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 # equil2
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/billdenney/equil2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/billdenney/equil2?branch=main)
 [![R-CMD-check](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/billdenney/equil2/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/equil2)](https://CRAN.R-project.org/package=equil2)
+[![Codecov test coverage](https://codecov.io/gh/billdenney/equil2/graph/badge.svg)](https://app.codecov.io/gh/billdenney/equil2)
 <!-- badges: end -->
 
 The goal of equil2 is to calculate urinary saturation with the EQUIL2 algorithm.
@@ -46,6 +46,10 @@ This is a basic example which shows you how to calculate supersaturation:
 
 ```{r example}
 library(equil2)
+# Phosphate and sulfate inputs are given in mmol/L so the meaning is
+# unambiguous: clinical labs often report "phosphate (mg/dL)" as mass of
+# inorganic phosphorus (P), but the mg_phosphate/dL unit in this package is
+# mass of the PO4 ion. See vignette("original-source") for details.
 equil2(
   sodium_mEq_L=units::set_units(45, "mmol_sodium/L"),
   potassium_mEq_L=units::set_units(55, "mmol_potassium/L"),
@@ -53,8 +57,8 @@ equil2(
   magnesium_mg_dL=units::set_units(15, "mg_magnesium/dL"),
   ammonia_mEq_L=units::set_units(10, "ug_ammonia/dL"),
   chloride_mEq_L=units::set_units(75, "mmol_chloride/L"),
-  phosphate_mg_dL=units::set_units(100, "mg_phosphate/dL"),
-  sulfate_mg_dL=units::set_units(20, "mEq_sulfate/L"),
+  phosphate_mg_dL=units::set_units(32.285, "mmol_phosphate/L"),
+  sulfate_mg_dL=units::set_units(10, "mmol_sulfate/L"),
   oxalate_mg_dL=units::set_units(10, "mg_oxalate/L"),
   citrate_mg_dL=units::set_units(400, "mg_citrate/L"),
   pH=5.5,
