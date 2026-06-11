@@ -26,7 +26,7 @@ Program for the Calculation of Urinary Saturation. Journal of Urology.
       number = {6},
       urldate = {2021-11-06},
       journal = {Journal of Urology},
-      author = {{Werness} and Peter G. and {Brown} and Charles M. and {Smith} and Lynwood H. and {Finlayson} and {Birdwell}},
+      author = {Peter G. Werness and Charles M. Brown and Lynwood H. Smith and Birdwell Finlayson},
       month = {Dec},
       year = {1985},
       pages = {1242--1244},

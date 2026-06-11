@@ -1,6 +1,9 @@
 # Changelog
 
-## equil2 1.0.0.9000
+## equil2 1.1.0
+
+- The `CITATION` file now uses
+  [`bibentry()`](https://rdrr.io/r/utils/bibentry.html)
 
 - New function
   [`equil2_v1()`](https://billdenney.github.io/equil2/reference/equil2_v1.md)
