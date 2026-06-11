@@ -1,4 +1,6 @@
-# equil2 1.0.0.9000
+# equil2 1.1.0
+
+* The `CITATION` file now uses `bibentry()`
 
 * New function `equil2_v1()` ports the original Mayo Clinic class-based
   VBA module (`clsEquil2`, attached to issue 2). V1 takes mmol/L inputs,
